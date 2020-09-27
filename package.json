@@ -1,0 +1,36 @@
+{
+    "name": "testing-package",
+    "version": "0.0.1",
+    "description": "## Stream notes",
+    "scripts": {
+        "tsc": "tsc",
+        "test": "mocha -r ts-node/register tests/**/*.test.ts",
+        "coverage": "nyc -r lcov -e .ts -x \"*.test.ts\" npm run test"
+    },
+    "main": "hello.ts",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/HappyCerberus/learning_javascript.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/HappyCerberus/learning_javascript/issues"
+    },
+    "homepage": "https://github.com/HappyCerberus/learning_javascript#readme",
+    "dependencies": {
+        "@types/node": "^14.11.2",
+        "expect.js": "^0.3.1",
+        "readline": "^1.3.0"
+    },
+    "devDependencies": {
+        "@types/chai": "^4.2.12",
+        "@types/mocha": "^8.0.3",
+        "chai": "^4.2.0",
+        "mocha": "^8.1.3",
+        "nyc": "^15.1.0",
+        "ts-node": "^9.0.0",
+        "typescript": "^4.0.3"
+    }
+}
