@@ -25,9 +25,9 @@ class State {
         private canibals: number = 3) { };
 
     compare(s: State): boolean {
-        return s.canibals == this.canibals
-            && s.hasBoat == this.hasBoat
-            && s.missionaries == this.missionaries;
+        return s.canibals === this.canibals
+            && s.hasBoat === this.hasBoat
+            && s.missionaries === this.missionaries;
     }
 
     clone(): State {
@@ -36,7 +36,7 @@ class State {
 
     transport(numMissionaries: number, numCanibals: number): StateType {
         if (numCanibals + numMissionaries > 2 ||
-            (numCanibals == 0 && numMissionaries == 0))
+            (numCanibals === 0 && numMissionaries === 0))
             return StateType.InvalidState;
         if (this.hasBoat && (numMissionaries > this.missionaries || numCanibals > this.canibals))
             return StateType.InvalidState;
@@ -52,12 +52,12 @@ class State {
         }
         this.hasBoat = !this.hasBoat;
 
-        if (!this.hasBoat && this.missionaries == 0 && this.canibals == 0)
+        if (!this.hasBoat && this.missionaries === 0 && this.canibals === 0)
             return StateType.GoalState;
 
-        if (this.missionaries != 0 && this.missionaries < this.canibals)
+        if (this.missionaries !== 0 && this.missionaries < this.canibals)
             return StateType.BadState;
-        if (3 - this.missionaries != 0 && 3 - this.missionaries < 3 - this.canibals)
+        if (3 - this.missionaries !== 0 && 3 - this.missionaries < 3 - this.canibals)
             return StateType.BadState;
 
         return StateType.GoodState;
@@ -85,21 +85,9 @@ class State {
     }
 
     private static waterStateString(boat: boolean): string {
-        let s = "";
         const w = "🌊";
         const b = "⛵";
-        if (boat) {
-            s += b;
-        } else {
-            s += w;
-        }
-        s += w + w + w;
-        if (!boat) {
-            s += b;
-        } else {
-            s += w;
-        }
-        return s;
+        return (boat ? b : w) + w + w + w + (boat ? w : b);
     }
 
     toString(): string {
@@ -120,14 +108,14 @@ function tryState(stack: Array<State>, state: State, numMissionaries: number, nu
             // check if visited
             if (stack.find((s: State) => {
                 return s.compare(localState);
-            }) == undefined) {
+            }) === undefined) {
                 stack.push(localState);
                 dfs(stack, localState);
             }
             break;
         case StateType.GoalState:
-            for (let i = 0; i < stack.length; i++) {
-                console.log(stack[i].toString());
+            for (const stackEntry of stack) {
+                console.log(stackEntry.toString());
             }
             console.log(localState.toString());
             console.log("💤💤💤💤💤💤💤💤💤💤💤💤💤💤💤💤");
